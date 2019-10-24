@@ -10,6 +10,14 @@ class Ship
 
     private $strength = 0;
 
+    private $underRepair;
+
+    public function __construct($name)
+    {
+        $this->name = $name;
+        $this->underRepair = mt_rand(1, 100) < 30;
+    }
+
     public function sayHello()
     {
         echo 'HELLO!';
@@ -99,5 +107,21 @@ class Ship
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUnderRepair()
+    {
+        return $this->underRepair;
+    }
+
+    /**
+     * @param bool $underRepair
+     */
+    public function setUnderRepair($underRepair)
+    {
+        $this->underRepair = $underRepair;
     }
 }
