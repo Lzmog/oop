@@ -2,22 +2,28 @@
 
 class ShipLoader
 {
-    function getShips()
+    public function getShips()
     {
-        $ships = [];
-
-        $ship = new Ship('Jedi Starfighter');
-        $ship->setWeaponPower(5);
-        $ship->setJediFactor(15);
-        $ship->setStrength(30);
-        $ships['starfighter'] = $ship;
-
-        $ship2 = new Ship('CloakShape Fighter');
-        $ship2->setWeaponPower(2);
-        $ship2->setJediFactor(2);
-        $ship2->setStrength(70);
-        $ships['cloakshape_fighter'] = $ship2;
-
+        $ships = array();
+        $shipsData = $this->queryForShips();
+        foreach ($shipsData as $shipData) {
+            $ship = new Ship($shipData['name']);
+            $ship->setWeaponPower($shipData['weapon_power']);
+            $ship->setJediFactor($shipData['jedi_factor']);
+            $ship->setStrength($shipData['strength']);
+            $ships[] = $ship;
+        }
         return $ships;
+    }
+
+    private function queryForShips()
+    {
+        $pdo = new PDO('mysql:host=localhost;dbname=symfony', 'symfony', 'symfony');
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $statement = $pdo->prepare('SELECT * FROM ship');
+        $statement->execute();
+        $shipArray = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $shipArray;
     }
 }
