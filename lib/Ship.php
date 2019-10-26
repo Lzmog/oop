@@ -2,6 +2,8 @@
 
 class Ship
 {
+    private $id;
+
     private $name;
 
     private $weaponPower = 0;
@@ -123,5 +125,21 @@ class Ship
     public function setUnderRepair($underRepair)
     {
         $this->underRepair = $underRepair;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param integer $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 }
