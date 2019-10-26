@@ -1,15 +1,9 @@
 <?php
 require __DIR__.'/bootstrap.php';
 
-$pdo = new PDO(
-    $configuration['db_dsn'],
-    $configuration['db_user'],
-    $configuration['db_pass']
-);
-
-$shipLoader = new ShipLoader(
-    $pdo
-);
+$container = new Container($configuration);
+$pdo = $container->getPDO();
+$shipLoader = new ShipLoader($pdo);
 
 $ships = $shipLoader->getShips();
 
