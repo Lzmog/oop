@@ -9,4 +9,17 @@ class RebelShip extends Ship
 
         return $coolJedis[$key];
     }
+
+    public function getType()
+    {
+        return 'Rebel';
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUnderRepair()
+    {
+        return true;
+    }
 }

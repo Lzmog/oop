@@ -5,9 +5,6 @@ $container = new Container($configuration);
 $shipLoader = $container->getShipLoader();
 $ships = $shipLoader->getShips();
 
-$rebelShip = new RebelShip('New Rebel Ship');
-$ships[] = $rebelShip;
-
 $errorMessage = '';
 if (isset($_GET['error'])) {
     switch ($_GET['error']) {
@@ -64,8 +61,9 @@ if (isset($_GET['error'])) {
                         <th>Ship</th>
                         <th>Weapon Power</th>
                         <th>Jedi Factor</th>
-                        <th>Strength</th>d
-                        <th>Status</th>d
+                        <th>Strength</th>
+                        <th>Status</th>
+                        <th>Type</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,6 +73,7 @@ if (isset($_GET['error'])) {
                             <td><?php echo $ship->getWeaponPower(); ?></td>
                             <td><?php echo $ship->getJediFactor(); ?></td>
                             <td><?php echo $ship->getStrength(); ?></td>
+
                             <td>
                                 <?php if ($ship->isUnderRepair()): ?>
                                     <i class="fa fa-sun-o"></i>
@@ -83,6 +82,7 @@ if (isset($_GET['error'])) {
                                 <?php endif; ?>
 
                             </td>
+                            <td><?php echo $ship->getType(); ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
