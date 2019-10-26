@@ -48,12 +48,13 @@ class Container
     }
 
     /**
-     * @return PDOShipStorage
+     * @return AbstractShipStorage
      */
     public function getShipStorage()
     {
         if ($this->shipStorage === null) {
-            $this->shipStorage = new PDOShipStorage($this->getPDO());
+//            $this->shipStorage = new PDOShipStorage($this->getPDO());
+            $this->shipStorage = new JsonFileShipStorage(__DIR__ . '/../../resources/ships.json');
         }
 
         return $this->shipStorage;
