@@ -74,6 +74,15 @@ class BattleManager
         return new BattleResult($usedJediPowers, $winningShip, $losingShip);
     }
 
+    public static function getAllBattleTypesWithDescription()
+    {
+        return [
+            self::TYPE_NORMAL => 'Normal',
+            self::TYPE_NO_JEDI => 'No Jedi Powers',
+            self::TYPE_ONLY_JEDI => 'Only Jedi Powers',
+        ];
+    }
+
     public function didJediDestroyShipUsingTheForce(AbstractShip $ship)
     {
         $jediHeroProbability = $ship->getJediFactor() / 100;
