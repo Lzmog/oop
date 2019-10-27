@@ -2,6 +2,9 @@
 
 namespace Service;
 
+use Model\BattleResult;
+use Model\AbstractShip;
+
 class BattleManager
 {
     const TYPE_NORMAL = 'type_normal';

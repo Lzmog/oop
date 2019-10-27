@@ -1,5 +1,7 @@
 <?php
 
+namespace Service;
+
 class PDOShipStorage implements ShipStorageInterface
 {
     private $pdo;
