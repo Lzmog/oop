@@ -61,7 +61,7 @@ abstract class AbstractShip
     public function setStrength($strength)
     {
         if (false === is_numeric($strength)) {
-            throw new Exception('Invalid strength passed');
+            throw new \Exception('Invalid strength passed');
         }
 
         $this->strength = $strength;
