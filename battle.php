@@ -1,6 +1,8 @@
 <?php
 require __DIR__.'/bootstrap.php';
 
+use Service\Container;
+
 $container = new Container($configuration);
 $shipLoader = $container->getShipLoader();
 
@@ -31,7 +33,8 @@ if ($ship1Quantity <= 0 || $ship2Quantity <= 0) {
 }
 
 $battleManager = $container->getBattleManager();
-$battleResult = $battleManager->battle($ship1, $ship1Quantity, $ship2, $ship2Quantity);
+$battleType = $_POST['battle_type'];
+$battleResult = $battleManager->battle($ship1, $ship1Quantity, $ship2, $ship2Quantity, $battleType);
 ?>
 
 <html>
@@ -63,7 +66,7 @@ $battleResult = $battleManager->battle($ship1, $ship1Quantity, $ship2, $ship2Qua
                 <h2 class="text-center">The Matchup:</h2>
                 <p class="text-center">
                     <br>
-                    <?php echo $ship1Quantity; ?> <?php echo $ship1->getName(); ?><?php echo $ship1Quantity > 1 ? 's': ''; ?>
+                    <?php echo $ship1Quantity; ?> <?php echo $ship1; ?><?php echo $ship1Quantity > 1 ? 's': ''; ?>
                     VS.
                     <?php echo $ship2Quantity; ?> <?php echo $ship2->getName(); ?><?php echo $ship2Quantity > 1 ? 's': ''; ?>
                 </p>
@@ -81,7 +84,7 @@ $battleResult = $battleManager->battle($ship1, $ship1Quantity, $ship2, $ship2Qua
                     <?php if ($battleResult->isThereAWinner() == null): ?>
                         Both ships destroyed each other in an epic battle to the end.
                     <?php else: ?>
-                        The <?php echo $battleResult->getWinningShip()->getName(); ?>
+                        The <?php echo $battleResult['winningShip']->getName(); ?>
                         <?php if ($battleResult->wereJediPowersUsed()): ?>
                             used its Jedi Powers for a stunning victory!
                         <?php else: ?>
@@ -93,7 +96,7 @@ $battleResult = $battleManager->battle($ship1, $ship1Quantity, $ship2, $ship2Qua
                 <h3>Remaining Strength</h3>
                 <dl class="dl-horizontal">
                     <dt><?php echo $ship1->getName(); ?></dt>
-                    <dd><?php echo $ship1->getStrength(); ?></dd>
+                    <dd><?php echo $ship1->strength; ?></dd>
                     <dt><?php echo $ship2->getName(); ?></dt>
                     <dd><?php echo $ship2->getStrength(); ?></dd>
                 </dl>

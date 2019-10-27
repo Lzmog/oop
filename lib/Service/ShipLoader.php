@@ -1,5 +1,13 @@
 <?php
 
+namespace Service;
+
+use Model\BountyHunterShip;
+use Model\RebelShip;
+use Model\Ship;
+use Model\AbstractShip;
+use Model\ShipCollection;
+
 class ShipLoader
 {
     private $shipStorage;
@@ -10,7 +18,7 @@ class ShipLoader
     }
 
     /**
-     * @return AbstractShip[]
+     * @return ShipCollection
      */
     public function getShips()
     {
@@ -19,7 +27,10 @@ class ShipLoader
         foreach ($shipsData as $shipData) {
             $ships[] = $this->createShipFromData($shipData);
         }
-        return $ships;
+
+        $ships[] = new BountyHunterShip('Slave I');
+
+        return new ShipCollection($ships);
     }
 
     /**
